@@ -1,0 +1,33 @@
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 30px;
+}
+
+.menu-item {
+    .picture {
+        max-height: 200px;
+        overflow: hidden;
+    }
+    header {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+
+        h3 {
+            font-size: 1.3rem;
+        }
+
+        h5 {
+            font-size: 1.2rem;
+            text-align: right;
+            color: var(--bs-primary);
+        }
+    }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "simple-menu",
+  "version": "1.0.0",
+  "description": "Simple Menu based on [Vanilla Javacript Projects](https://www.vanillajavascriptprojects.com/)",
+  "source": "./src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chausme/simple-menu.git"
+  },
+  "author": "chausme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chausme/simple-menu/issues"
+  },
+  "homepage": "https://github.com/chausme/simple-menu#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.0",
+    "parcel": "^2.8.0"
+  }
+}
