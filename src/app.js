@@ -3,7 +3,7 @@ const menu = [
         id: 1,
         title: 'Arugula and burratta pizza',
         category: 'Dinner',
-        img: new URL('./images/pizza.jpg', import.meta.url),
+        img: new URL('./images/pizza.jpg?as=webp&quality=75&width=600', import.meta.url),
         price: 15,
         description:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas aliquid quia repellat sequi ipsa inventore! Repellendus possimus aut veritatis temporibus.',

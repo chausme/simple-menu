@@ -20,6 +20,7 @@
   "homepage": "https://github.com/chausme/simple-menu#readme",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
-    "parcel": "^2.8.0"
+    "parcel": "^2.8.0",
+    "sharp": "^0.31.2"
   }
 }
