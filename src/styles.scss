@@ -4,6 +4,10 @@ $screen-md-min: 992px;
 $screen-lg-min: 1200px;
 $screen-xl-min: 1400px;
 
+:root {
+    --transition: all 0.1s linear;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -11,20 +15,34 @@ img {
 
 .items {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     column-gap: 30px;
     row-gap: 30px;
 
     @media (min-width: $screen-sm-min) {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
 .menu-item {
+    @media (min-width: $screen-sm-min) {
+        cursor: pointer;
+    }
+
+    &:hover {
+        .picture {
+            @media (min-width: $screen-sm-min) {
+                transform: scale(105%);
+            }
+        }
+    }
+
     .picture {
         max-height: 200px;
         overflow: hidden;
+        transition: var(--transition);
     }
+
     header {
         margin-top: 20px;
         display: grid;
