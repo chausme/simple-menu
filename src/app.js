@@ -2,7 +2,7 @@ const menu = [
     {
         id: 1,
         title: 'Arugula and burratta pizza',
-        category: 'Lunch',
+        category: 'lunch',
         img: new URL('./images/pizza.jpg?as=webp&quality=75&width=600', import.meta.url),
         price: 15,
         description:
@@ -11,7 +11,7 @@ const menu = [
     {
         id: 2,
         title: 'Avocado and Poached Eggs on Toast',
-        category: 'Breakfast',
+        category: 'breakfast',
         img: new URL('./images/toast.jpg?as=webp&quality=75&width=600', import.meta.url),
         price: 7,
         description:
@@ -20,7 +20,7 @@ const menu = [
     {
         id: 3,
         title: 'Cortado',
-        category: 'Drinks',
+        category: 'drinks',
         img: new URL('./images/cortado.jpg?as=webp&quality=75&width=600', import.meta.url),
         price: 4,
         description:
@@ -29,9 +29,26 @@ const menu = [
 ];
 
 const items = document.querySelector('.items');
+const filterBtns = document.querySelectorAll(':scope .filters button');
+
+// Load items
 
 window.addEventListener('DOMContentLoaded', () => {
     displayMenuItems(menu);
+});
+
+// Filter items
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+        const category = e.currentTarget.dataset.category;
+        const menuFiltered = menu.filter(item => {
+            if (item.category === category) {
+                return item;
+            }
+        });
+        displayMenuItems(category === 'all' ? menu : menuFiltered);
+    });
 });
 
 const displayMenuItems = menuItems => {
