@@ -26,29 +26,25 @@ const menu = [
         description:
             'Adipisicing elit. Totam, doloremque incidunt rerum, reiciendis accusantium iusto odio asperiores dolore pariatur eos possimus ab odit voluptatibus nam perferendis dicta suscipit omnis aspernatur fugiat? Ut, tempore!',
     },
+    {
+        id: 4,
+        title: 'Flat White',
+        category: 'drinks',
+        img: new URL('./images/flat-white.jpg?as=webp&quality=75&width=600', import.meta.url),
+        price: 4,
+        description:
+            'Adipisicing elit. Totam, doloremque incidunt rerum, reiciendis accusantium iusto odio asperiores dolore pariatur eos possimus ab odit voluptatibus nam perferendis dicta suscipit omnis aspernatur fugiat? Ut, tempore!',
+    },
 ];
 
 const items = document.querySelector('.items');
-const filterBtns = document.querySelectorAll(':scope .filters button');
+const filters = document.querySelector('.filters');
 
 // Load items
 
 window.addEventListener('DOMContentLoaded', () => {
     displayMenuItems(menu);
-});
-
-// Filter items
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', e => {
-        const category = e.currentTarget.dataset.category;
-        const menuFiltered = menu.filter(item => {
-            if (item.category === category) {
-                return item;
-            }
-        });
-        displayMenuItems(category === 'all' ? menu : menuFiltered);
-    });
+    displayButtons();
 });
 
 const displayMenuItems = menuItems => {
@@ -68,4 +64,34 @@ const displayMenuItems = menuItems => {
     });
     displayMenu = displayMenu.join('');
     items.innerHTML = displayMenu;
+};
+
+const displayButtons = () => {
+    const categories = menu.reduce(
+        (values, item) => {
+            if (!values.includes(item.category)) {
+                values.push(item.category);
+            }
+            return values;
+        },
+        ['all']
+    );
+    const categoryBtns = categories
+        .map(category => {
+            return `<button class="btn btn-dark mx-2 mb-3 mb-sm-0" type="button" data-category="${category}">${category}</button>`;
+        })
+        .join('');
+    filters.innerHTML = categoryBtns;
+    const filterBtns = document.querySelectorAll(':scope .filters button');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', e => {
+            const category = e.currentTarget.dataset.category;
+            const menuFiltered = menu.filter(item => {
+                if (item.category === category) {
+                    return item;
+                }
+            });
+            displayMenuItems(category === 'all' ? menu : menuFiltered);
+        });
+    });
 };
