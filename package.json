@@ -1,26 +1,32 @@
 {
-  "name": "simple-menu",
-  "version": "1.0.0",
-  "description": "Simple Menu based on [Vanilla Javacript Projects](https://www.vanillajavascriptprojects.com/)",
-  "source": "./src/index.html",
-  "scripts": {
-    "start": "parcel",
-    "build": "parcel build",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chausme/simple-menu.git"
-  },
-  "author": "chausme",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/chausme/simple-menu/issues"
-  },
-  "homepage": "https://github.com/chausme/simple-menu#readme",
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.8.0",
-    "parcel": "^2.8.0",
-    "sharp": "^0.31.2"
-  }
+    "name": "simple-menu",
+    "version": "1.0.0",
+    "description": "Simple Menu based on [Vanilla Javacript Projects](https://www.vanillajavascriptprojects.com/)",
+    "source": "./src/index.html",
+    "scripts": {
+        "start": "parcel",
+        "build": "parcel build",
+        "lint": "npx eslint src",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/chausme/simple-menu.git"
+    },
+    "author": "chausme",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/chausme/simple-menu/issues"
+    },
+    "homepage": "https://github.com/chausme/simple-menu#readme",
+    "devDependencies": {
+        "@parcel/transformer-sass": "^2.8.0",
+        "eslint": "^8.29.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "parcel": "^2.8.0",
+        "prettier": "2.8.1",
+        "sharp": "^0.31.2"
+    }
 }

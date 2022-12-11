@@ -40,16 +40,9 @@ const menu = [
 const items = document.querySelector('.items');
 const filters = document.querySelector('.filters');
 
-// Load items
-
-window.addEventListener('DOMContentLoaded', () => {
-    displayMenuItems(menu);
-    displayButtons();
-});
-
 const displayMenuItems = menuItems => {
-    let displayMenu = menuItems.map(item => {
-        return `<article class="menu-item">
+    let displayMenu = menuItems.map(
+        item => `<article class="menu-item">
             <div class="picture shadow">
                 <img src="${item.img}" class="photo" alt="Menu item" />
             </div>
@@ -60,8 +53,8 @@ const displayMenuItems = menuItems => {
                 </header>
                 <p class="description">${item.description}</p>
             </div>
-        </article>`;
-    });
+        </article>`
+    );
     displayMenu = displayMenu.join('');
     items.innerHTML = displayMenu;
 };
@@ -77,21 +70,30 @@ const displayButtons = () => {
         ['all']
     );
     const categoryBtns = categories
-        .map(category => {
-            return `<button class="btn btn-dark mx-2 mb-3 mb-sm-0" type="button" data-category="${category}">${category}</button>`;
-        })
+        .map(
+            category =>
+                `<button class="btn btn-dark mx-2 mb-3 mb-sm-0" type="button" data-category="${category}">${category}</button>`
+        )
         .join('');
     filters.innerHTML = categoryBtns;
     const filterBtns = document.querySelectorAll(':scope .filters button');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', e => {
-            const category = e.currentTarget.dataset.category;
+            const { category } = e.currentTarget.dataset;
             const menuFiltered = menu.filter(item => {
                 if (item.category === category) {
                     return item;
                 }
+                return false;
             });
             displayMenuItems(category === 'all' ? menu : menuFiltered);
         });
     });
 };
+
+// Load items
+
+window.addEventListener('DOMContentLoaded', () => {
+    displayMenuItems(menu);
+    displayButtons();
+});
