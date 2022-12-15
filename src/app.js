@@ -1,4 +1,87 @@
-const menu = [
+class Menu {
+    menuItems;
+
+    constructor(items) {
+        this.menuItems = items;
+    }
+
+    get items() {
+        return this.menuItems;
+    }
+
+    set items(items) {
+        this.menuItems = items;
+    }
+
+    displayMenuItems = (items = this.menuItems) => {
+        try {
+            if (!items.length) {
+                throw new Error('No menu items found');
+            }
+            const itemsEl = document.querySelector('.items');
+            let displayMenu = items.map(
+                item => `<article class="menu-item">
+                    <div class="picture shadow">
+                        <img src="${item.img}" class="photo" alt="Menu item" />
+                    </div>
+                    <div class="item-info">
+                        <header>
+                            <h3>${item.title}</h3>
+                            <h5 class="price">$${item.price}</h5>
+                        </header>
+                        <p class="description">${item.description}</p>
+                    </div>
+                </article>`
+            );
+            displayMenu = displayMenu.join('');
+            itemsEl.innerHTML = displayMenu;
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    displayButtons = () => {
+        try {
+            if (!this.menuItems.length) {
+                throw new Error('No menu items found');
+            }
+            const filters = document.querySelector('.filters');
+            const categories = this.menuItems.reduce(
+                (values, item) => {
+                    if (!values.includes(item.category)) {
+                        values.push(item.category);
+                    }
+                    return values;
+                },
+                ['all']
+            );
+            const categoryBtns = categories
+                .map(
+                    category =>
+                        `<button class="btn btn-dark mx-2 mb-3 mb-sm-0" type="button" data-category="${category}">${category}</button>`
+                )
+                .join('');
+            filters.innerHTML = categoryBtns;
+            const filterBtns = document.querySelectorAll(':scope .filters button');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const { category } = e.currentTarget.dataset;
+                    const menuFiltered = this.menuItems.filter(item => {
+                        if (item.category === category) {
+                            return item;
+                        }
+                        return false;
+                    });
+                    this.displayMenuItems(category === 'all' ? this.menuItems : menuFiltered);
+                });
+            });
+        } catch (e) {
+            console.error(e);
+        }
+    };
+}
+
+const menu = new Menu([
     {
         id: 1,
         title: 'Arugula and burratta pizza',
@@ -35,65 +118,11 @@ const menu = [
         description:
             'Adipisicing elit. Totam, doloremque incidunt rerum, reiciendis accusantium iusto odio asperiores dolore pariatur eos possimus ab odit voluptatibus nam perferendis dicta suscipit omnis aspernatur fugiat? Ut, tempore!',
     },
-];
-
-const items = document.querySelector('.items');
-const filters = document.querySelector('.filters');
-
-const displayMenuItems = menuItems => {
-    let displayMenu = menuItems.map(
-        item => `<article class="menu-item">
-            <div class="picture shadow">
-                <img src="${item.img}" class="photo" alt="Menu item" />
-            </div>
-            <div class="item-info">
-                <header>
-                    <h3>${item.title}</h3>
-                    <h5 class="price">$${item.price}</h5>
-                </header>
-                <p class="description">${item.description}</p>
-            </div>
-        </article>`
-    );
-    displayMenu = displayMenu.join('');
-    items.innerHTML = displayMenu;
-};
-
-const displayButtons = () => {
-    const categories = menu.reduce(
-        (values, item) => {
-            if (!values.includes(item.category)) {
-                values.push(item.category);
-            }
-            return values;
-        },
-        ['all']
-    );
-    const categoryBtns = categories
-        .map(
-            category =>
-                `<button class="btn btn-dark mx-2 mb-3 mb-sm-0" type="button" data-category="${category}">${category}</button>`
-        )
-        .join('');
-    filters.innerHTML = categoryBtns;
-    const filterBtns = document.querySelectorAll(':scope .filters button');
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', e => {
-            const { category } = e.currentTarget.dataset;
-            const menuFiltered = menu.filter(item => {
-                if (item.category === category) {
-                    return item;
-                }
-                return false;
-            });
-            displayMenuItems(category === 'all' ? menu : menuFiltered);
-        });
-    });
-};
+]);
 
 // Load items
 
 window.addEventListener('DOMContentLoaded', () => {
-    displayMenuItems(menu);
-    displayButtons();
+    menu.displayMenuItems();
+    menu.displayButtons();
 });
